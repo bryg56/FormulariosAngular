@@ -1,0 +1,56 @@
+<div class="container">
+    <h1>Formularios</h1>
+    <div [formGroup]="formulario">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" formControlName="name" [ngClass]="{'is-invalid': formulario.get('name').errors && formulario.get('name').touched , 'is-valid': !formulario.get('name').errors && formulario.get('name').touched}" class="form-control" type="text" name="">
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.name.errors?.required && formulario.controls.name.touched">Nombre es necesario</div>
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.name.errors?.minlength">Es necesario que el nombre tenga 5 letras</div>
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.name.errors?.ExisteNumero">El nombre no debe contener Numeros</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" [ngClass]="{'is-invalid': formulario.get('email').errors && formulario.get('email').touched, 'is-valid': !formulario.get('email').errors && formulario.get('email').touched}" formControlName="email" type="text" name="">
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.email.errors?.required && formulario.controls.email.touched">Email es necesario</div>
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.email.errors?.pattern">Email invalido, forma valida "example@example.com"</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="Mensaje">Mensaje</label>
+                    <textarea id="Mensaje" class="form-control" [ngClass]="{'is-invalid': formulario.get('Mensaje').errors && formulario.get('Mensaje').touched,'is-valid': !formulario.get('Mensaje').errors && formulario.get('Mensaje').touched}" formControlName="Mensaje"
+                        name="" rows="3"></textarea>
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.Mensaje.errors?.required && formulario.controls.Mensaje.touched">Mensaje es necesario</div>
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.Mensaje.errors?.minlength">Mensaje muy chico</div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="passWord">Ingrese Contraseña</label>
+                    <input id="passWord" class="form-control" type="text" name="" formControlName="pass" (keyup)="verEstadoFormulario()" [ngClass]="{'is-invalid': formulario.get('pass').errors && formulario.get('pass').touched,'is-valid': !formulario.get('pass').errors && formulario.get('pass').touched}">
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.pass.errors?.required && formulario.controls.pass.touched">Contraseña obligatoria</div>
+                    <div class="invalid-feedback d-block" *ngIf="formulario.controls.pass.errors?.pattern">La contraseña debe de tener por lo menos 1 minuscula, 1 mayuscula, 1 numero y un caracter especial</div>
+                </div>
+                <div class="form-group">
+                    <label for="passWord2">Repita Contraseña</label>
+                    <input id="passWord2" class="form-control" type="password" name="" formControlName="pass2">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button type="button" name="" id="bntMessage" *ngIf="formulario.valid" (click)="verEstadoFormulario()" class="btn btn-primary btn-lg btn-block">Enviar Mensaje</button>
+            </div>
+        </div>
+    </div>
+
+</div>
