@@ -24,6 +24,7 @@ export class FormularioHomeComponent implements OnInit {
       pass:new FormControl(null,[Validators.minLength(8),Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)]),
       pass2:new FormControl(null)
     });
+    this.formulario.controls.pass2.setValidators([this.MatchPassword.bind(this)]);
     
   }
   public verEstadoFormulario():void{
@@ -35,6 +36,12 @@ export class FormularioHomeComponent implements OnInit {
     if(!/^[a-zA-Z\s]*$/.test(control.value))return {ExisteNumero:true};
    
     return {ExisteNumero:false};
+  }
+  private MatchPassword(control:FormControl):{[key:string]:boolean}{
+    
+    console.log(this.formulario.controls );
+    if(control.value!=this.formulario.controls.pass1.value)return{noIgual:true};
+    return{noIgual:false};
   }
 
 }
